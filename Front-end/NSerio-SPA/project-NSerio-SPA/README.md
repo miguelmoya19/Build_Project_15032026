@@ -1,27 +1,72 @@
-# ProjectNSerioSPA
+📌 Prueba Técnica Angular v16
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+Este proyecto fue desarrollado en Angular v16 como parte de una prueba técnica, aplicando buenas prácticas de arquitectura, modularización y reutilización de componentes para garantizar escalabilidad, mantenibilidad y buen rendimiento.
 
-## Development server
+🚀 Características principales
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Implementación de Lazy Loading para la carga modular de la aplicación.
 
-## Code scaffolding
+Cada módulo cuenta con su propio:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+module
 
-## Build
+routing
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+configuración independiente
 
-## Running unit tests
+Uso de Servicios HTTP para la comunicación con APIs.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Implementación de RxJS para el manejo reactivo de datos.
 
-## Running end-to-end tests
+Uso de Formularios Reactivos para validación y control de entradas.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Tipado fuerte con TypeScript para mejorar la mantenibilidad del código.
 
-## Further help
+Creación de Pipes personalizados para validaciones y transformaciones.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Aplicación de lógica condicional para estilos dinámicos (colores según estado).
+
+Desarrollo de una tabla genérica reutilizable para ser utilizada en diferentes módulos.
+
+Uso de librerías externas para mejorar la experiencia de usuario:
+
+SweetAlert2 (Swal)
+
+Chart.js para gráficos
+
+🛠️ Tecnologías usadas
+
+Angular 16
+
+TypeScript
+
+RxJS
+
+Angular Reactive Forms
+
+Bootstrap / CSS
+
+SweetAlert2
+
+Chart.js
+
+▶️ Instalación y ejecución
+npm install
+ng serve
+
+Luego abrir en el navegador:
+
+http://localhost:4200/
+📂 Arquitectura
+
+El proyecto sigue una arquitectura modular usando Lazy Loading en Angular v16 para mejorar el rendimiento y la escalabilidad.
+
+Cada módulo contiene:
+
+Module
+
+Routing
+
+Components
+
+
