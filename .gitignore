@@ -1,0 +1,143 @@
+# ===============================
+
+# ANGULAR / NODE
+
+# ===============================
+
+node_modules/
+dist/
+tmp/
+out-tsc/
+coverage/
+.angular/
+.angular/cache
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===============================
+
+# TYPESCRIPT
+
+# ===============================
+
+*.tsbuildinfo
+
+# ===============================
+
+# ANGULAR ENV
+
+# ===============================
+
+src/environments/*.local.ts
+
+# ===============================
+
+# SYSTEM FILES
+
+# ===============================
+
+.DS_Store
+Thumbs.db
+
+# ===============================
+
+# VS CODE
+
+# ===============================
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# ===============================
+
+# VISUAL STUDIO
+
+# ===============================
+
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ===============================
+
+# .NET BUILD FILES
+
+# ===============================
+
+bin/
+obj/
+
+# ===============================
+
+# .NET GENERATED FILES
+
+# ===============================
+
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# ===============================
+
+# NUGET
+
+# ===============================
+
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# ===============================
+
+# BUILD CACHE
+
+# ===============================
+
+project.assets.json
+project.nuget.cache
+*.assets.cache
+
+# ===============================
+
+# TEST RESULTS
+
+# ===============================
+
+TestResults/
+
+# ===============================
+
+# PUBLISH
+
+# ===============================
+
+publish/
+wwwroot/dist/
+
+# ===============================
+
+# BACKUPS
+
+# ===============================
+
+*.bak
+*.backup
+
+# ===============================
+
+# DATABASE
+
+# ===============================
+
+*.mdf
+*.ldf

@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="dashboard-title">
+      <h1>Panel de control</h1>
+      <p class="dashboard-subtitle">Navega datos en tiempo real, filtra y descubre patrones rápidamente.</p>
+    </div>
+    <div class="dashboard-actions">
+      <button mat-flat-button (click)="openCreateTaskDialog()" class="create-task-btn">
+        <span class="create-task-icon">
+          <mat-icon>rocket_launch</mat-icon>
+        </span>
+        <span class="create-task-label">Nueva tarea</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="chart-section">
+    <mat-card class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">Estado de tareas</div>
+        <div class="chart-subtitle">Un vistazo rápido de la distribución por estado</div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [data]=""
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [type]="barChartType">
+        </canvas>
+      </div>
+    </mat-card>
+  </section>
+
+  <section class="tables-grid">
+    <mat-accordion class="dashboard-accordion" multi>
+      <mat-expansion-panel class="table-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Desarolladores</mat-panel-title>
+          <mat-panel-description>Revisa la información relacionada con los desarolladores.</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="table-panel-content" *ngIf="this.developerWorkload.length >0">
+          <app-generic-table [data]="this.developerWorkload" [displayedColumns]="this.displayColumnsDeveloper">
+          </app-generic-table>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="table-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Proyectos</mat-panel-title>
+          <mat-panel-description>Revisa la información relacionada con los projectos.</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="table-panel-content" *ngIf="this.dataProject.length >0">
+          <app-generic-table [data]="this.dataProject" [displayedColumns]="this.displayColumnsProject"
+           [rowStyle]="rowStyleProject" [showActions]="true" (actionClick)="onProjectAction($event)">
+          </app-generic-table>
+        </div>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+</div>

@@ -1,0 +1,40 @@
+﻿using Microsoft.AspNetCore.Http;
+using System.Net;
+using System.Text.Json;
+
+public class ExceptionMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public ExceptionMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (Exception ex)
+        {
+            await HandleExceptionAsync(context, ex);
+        }
+    }
+
+    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        var result = JsonSerializer.Serialize(new
+        {
+            success = false,
+            message = exception.Message,
+            stackTrace = exception.StackTrace
+        });
+
+        return context.Response.WriteAsync(result);
+    }
+}

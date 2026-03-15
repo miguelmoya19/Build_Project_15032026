@@ -1,0 +1,87 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>
+    <mat-icon class="header-icon">rocket_launch</mat-icon>
+    Crear Nueva Tarea
+  </h2>
+  <button mat-icon-button mat-dialog-close class="close-btn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="this.formTask" class="task-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="projectId" class="form-label">Proyecto</label>
+        <select id="projectId" formControlName="projectId" class="form-select">
+            <option [ngValue]="null" selected>Selecciona un estado</option>
+           <option *ngFor="let item of this.projectInformation" [ngValue]="item.statusProjectId" >{{item.statusProject}}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="title" class="form-label">Título</label>
+        <input id="title" type="text" formControlName="title" placeholder="Ingresa el título de la tarea" class="form-input" [class.error]="showErrors && formTask.get('title')?.invalid">
+        <div class="error-message" *ngIf="showErrors && formTask.get('title')?.invalid">Campo requerido</div>
+      </div>
+    </div>
+
+    <div class="form-field full-width">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea id="description" formControlName="description" rows="3" placeholder="Describe la tarea en detalle" class="form-textarea"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="assigneeId" class="form-label">Asignado a</label>
+        <select id="assigneeId" formControlName="assigneeId" class="form-select">
+          <option [ngValue]="null" selected>Selecciona un desarrollador</option>
+          <option *ngFor="let item of this.devInformation" [ngValue]="item.developerId" >{{item.fullName}}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="status" class="form-label">Estado</label>
+        <select id="status" formControlName="status" class="form-select" [class.error]="showErrors && formTask.get('status')?.invalid">
+          <option [ngValue]="null" selected>Selecciona un estado</option>
+           <option *ngFor="let item of this.tasksInformation" [ngValue]="item.statusTaskId" >{{item.statusTask}}</option>
+        </select>
+        <div class="error-message" *ngIf="showErrors && formTask.get('status')?.invalid">Campo requerido</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="priority" class="form-label">Prioridad</label>
+        <select id="priority" formControlName="priority" class="form-select" [class.error]="showErrors && formTask.get('priority')?.invalid">
+           <option [ngValue]="null" selected>Selecciona un estado</option>
+           <option *ngFor="let item of this.priorityInformation" [ngValue]="item.statusPriorityId" >{{item.statusPriority}}</option>
+        </select>
+        <div class="error-message" *ngIf="showErrors && formTask.get('priority')?.invalid">Campo requerido</div>
+      </div>
+
+      <div class="form-field">
+        <label for="estimatedComplexity" class="form-label">Complejidad estimada</label>
+        <select id="estimatedComplexity" formControlName="estimatedComplexity" class="form-select" [class.error]="showErrors && formTask.get('estimatedComplexity')?.invalid">
+          <option [ngValue]="null">Selecciona una complejidad</option>
+          <option [ngValue]="1">1 - Muy Baja</option>
+          <option [ngValue]="2">2 - Baja</option>
+          <option [ngValue]="3">3 - Media</option>
+          <option [ngValue]="4">4 - Alta</option>
+          <option [ngValue]="5">5 - Muy Alta</option>
+        </select>
+        <div class="error-message" *ngIf="showErrors && formTask.get('estimatedComplexity')?.invalid">Campo requerido</div>
+      </div>
+    </div>
+
+    <div class="form-field full-width">
+      <label for="dueDate" class="form-label">Fecha de vencimiento</label>
+      <input id="dueDate" type="date" formControlName="dueDate" class="form-input">
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button class="cancel-btn" (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button class="save-btn" (click)="saveTasks()">Crear Tarea</button>
+</mat-dialog-actions>

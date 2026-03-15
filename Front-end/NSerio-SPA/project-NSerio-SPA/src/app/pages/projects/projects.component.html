@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Tareas del Proyecto {{ projectId }}</h1>
+
+  <!-- Filters -->
+  <div class="filters-container">
+
+    <div class="filter-group">
+      <label for="status">Filtrar por Estado</label>
+      <select id="status">
+        <option [ngValue]="null" selected>Seleccionar una opción</option>
+        <option *ngFor="let item of this.tasksInformation" [ngValue]="item.statusTask">{{item.statusTask}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="developer">Filtrar por Desarrollador</label>
+      <select id="developer">
+        <option [ngValue]="null" selected>Seleccionar una opción</option>
+          <!-- Angular sigue funcionando aquí -->
+        <option *ngFor="let item of this.devInformation" [value]="item.developerId">
+          {{ item.fullName }}
+        </option>
+
+      </select>
+    </div>
+
+  </div>
+  <br>
+  <app-generic-table 
+  [displayedColumns]="this.displayedColumns" 
+  [data]="this.data" />
+  <div class="box-btn">
+
+    <button (click)="this.previousData()">Anterior</button>
+    <button (click)="this.nextData()">Siguiente</button>
+  </div>
+
+</div>

@@ -1,0 +1,48 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>DevTracker</span>
+      </div>
+
+      <nav class="nav">
+        <a [routerLink]="'/dashboard'" class="active">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a [routerLink]="'/developers'">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>Desarrolladores</span>
+        </a>
+
+        <a [routerLink]="'/tasks'">
+          <i class="fa-solid fa-tasks"></i>
+          <span>Tareas</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <span class="sidebar-version">v1.0</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <div class="header-left">
+        <h2 class="title">Sistema En Tiempo Real</h2>
+        <p class="subtitle">Todo tu seguimiento en un solo lugar</p>
+      </div>
+
+    </header>
+
+    <section class="content">
+      <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </section>
+  </main>
+</div>
+
