@@ -69,7 +69,7 @@ namespace Software.Application.Services
         {
             TaskValidator.ValidateFieldDescription(model.Description ?? "");
             TaskValidator.ValidatorLengthTitle(model!.Title ?? "");
-            TaskValidator.ValidatorLengthStatus(model!.Status ?? -1);
+            TaskValidator.ValidatorLengthStatus(model!.Status ?? "");
             TaskValidator.ValidatorEstimatedComplexity(model.EstimatedComplexity);
             TaskValidator.ValidatorFkProjectAndDev(model.AssigneeId, model.ProjectId);
             await _dbHandlerTask.InsertAsyncTask(model);

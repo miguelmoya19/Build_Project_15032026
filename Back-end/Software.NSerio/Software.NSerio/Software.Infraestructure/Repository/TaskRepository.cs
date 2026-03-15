@@ -99,7 +99,7 @@ namespace Software.Infraestructure.Repository
 
                 firstTask.Status = model.Status;
                 firstTask.Priority = model.Priority;
-                firstTask.EstimatedComplexity = model.EstimatedComplexily;
+                firstTask.EstimatedComplexity = model.EstimatedComplexity;
 
                 await _context.SaveChangesAsync();
 

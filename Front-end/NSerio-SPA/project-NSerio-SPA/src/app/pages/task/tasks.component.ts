@@ -1,6 +1,6 @@
 import { Component, OnInit, Type } from '@angular/core';
 import { NserioApiService } from 'src/app/services/nserio-api.service';
-import { IAllTasks } from './interfaces/IAllTasks';
+import { IAllTasks } from '../../interfaces/IAllTasks';
 import { responseModel } from 'src/app/Shared/responseModel';
 import { MessageService } from 'src/app/services/message-service';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { CreateTaskDialogComponent } from '../dash-board/modals/create-task-dial
 import { ChangeInformationService } from 'src/app/services/change-information.service';
 import { tap } from 'rxjs';
 import { Developer, PriorityStatus, ProjectStatus, ResponseModelGenericStatus, TaskStatus } from 'src/app/interfaces/ICodeGenericModel';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -22,7 +23,7 @@ export class TasksComponent implements OnInit {
   constructor(private api: NserioApiService, 
     private swal: MessageService,
      private dialog: MatDialog,
-    private readonly shared: ChangeInformationService<IAllTasks[]>){
+    private readonly shared: ChangeInformationService<IAllTasks[]>, private readonly router: Router){
 
 
   }
@@ -45,14 +46,10 @@ export class TasksComponent implements OnInit {
 
 
 
-    public openCreateTaskDialog(event: IAllTasks[]): void {
+    public openCreateTaskDialog(event: IAllTasks): void {
 
-      this.shared.setterSubject(event);
-       this.dialog.open(CreateTaskDialogComponent, {
-        width: '600px',
-        maxWidth: '90vw',
-        disableClose: false
-      });
+      this.router.navigate([`${this.router.url}/informationTask/${event.taskId}`])
+  
     }
 
 

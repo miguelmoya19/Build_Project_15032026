@@ -8,9 +8,9 @@ namespace Software.Domain.Dtos
 {
     public class FieldsTaskModel
     {
-        public int Status { get; set; }
-        public int Priority { get; set; }
+        public string Status { get; set; }
+        public string Priority { get; set; }
 
-        public int EstimatedComplexily { get; set; }
+        public int EstimatedComplexity { get; set; }
     }
 }

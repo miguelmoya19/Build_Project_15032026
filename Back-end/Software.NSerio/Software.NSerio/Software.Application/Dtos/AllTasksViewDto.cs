@@ -22,9 +22,9 @@ namespace Software.Application.Dtos
         [JsonPropertyName(" Asignado a")]
         public string Assignee { get; set; }
         [JsonPropertyName("Estado")]
-        public int Status { get; set; }
+        public string Status { get; set; }
         [JsonPropertyName("Prioridad")]
-        public int Priority { get; set; }
+        public string Priority { get; set; }
         [JsonPropertyName("Complejidad estimada")]
         public int EstimatedComplexity { get; set; }
         [JsonPropertyName("Fecha de vencimiento")]

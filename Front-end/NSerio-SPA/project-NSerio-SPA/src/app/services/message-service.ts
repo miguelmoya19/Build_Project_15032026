@@ -11,7 +11,11 @@ export class MessageService {
       icon: 'success',
       title: title,
       text: text,
-      confirmButtonColor: '#3085d6'
+      toast: true,
+      showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+              position: 'top-end',
     });
   }
 
@@ -20,7 +24,11 @@ export class MessageService {
       icon: 'error',
       title: title,
       text: text,
-      confirmButtonColor: '#d33'
+      confirmButtonColor: '#d33',
+       showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+              position: 'top-end',
     });
   }
 
@@ -29,7 +37,11 @@ export class MessageService {
       icon: 'warning',
       title: title,
       text: text,
-      confirmButtonColor: '#f39c12'
+      confirmButtonColor: '#f39c12',
+       showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+              position: 'top-end',
     });
   }
 

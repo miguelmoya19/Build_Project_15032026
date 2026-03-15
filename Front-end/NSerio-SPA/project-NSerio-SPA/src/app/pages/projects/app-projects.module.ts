@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -28,6 +28,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    ReactiveFormsModule,
     MatChipsModule,
     ProjectsRoutingModule,
     ComponentsModule

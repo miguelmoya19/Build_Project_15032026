@@ -2,29 +2,57 @@
   <h1>Tareas del Proyecto {{ projectId }}</h1>
 
   <!-- Filters -->
+ <form [formGroup]="formFilter">
+
   <div class="filters-container">
 
     <div class="filter-group">
       <label for="status">Filtrar por Estado</label>
-      <select id="status">
-        <option [ngValue]="null" selected>Seleccionar una opción</option>
-        <option *ngFor="let item of this.tasksInformation" [ngValue]="item.statusTask">{{item.statusTask}}</option>
-      </select>
-    </div>
 
-    <div class="filter-group">
-      <label for="developer">Filtrar por Desarrollador</label>
-      <select id="developer">
-        <option [ngValue]="null" selected>Seleccionar una opción</option>
-          <!-- Angular sigue funcionando aquí -->
-        <option *ngFor="let item of this.devInformation" [value]="item.developerId">
-          {{ item.fullName }}
+      <select id="status" formControlName="status">
+
+        <option [ngValue]="null">
+          Seleccionar una opción
+        </option>
+
+        <option
+          *ngFor="let item of tasksInformation"
+          [ngValue]="item.statusTask"
+        >
+          {{ item.statusTask }}
         </option>
 
       </select>
     </div>
 
+
+    <div class="filter-group">
+      <label for="developer">Filtrar por Desarrollador</label>
+
+      <select id="developer" formControlName="dev">
+
+        <option [ngValue]="null">
+          Seleccionar una opción
+        </option>
+
+        <option
+          *ngFor="let item of devInformation"
+          [ngValue]="item.developerId"
+        >
+          {{ item.fullName }}
+        </option>
+
+      </select>
+
+    </div>
+
+     <div class="filter-group">
+        <button (click)="this.clearFilter()">Limpiar filtro</button>
+    </div>
+
   </div>
+
+</form>
   <br>
   <app-generic-table 
   [displayedColumns]="this.displayedColumns" 

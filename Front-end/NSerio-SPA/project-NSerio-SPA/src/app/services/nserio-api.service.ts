@@ -45,8 +45,8 @@ export class NserioApiService {
   }
 
   // PUT
-  updateAppNSerio<T>(url: string, id: number, Body: T): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}${url}/${id}`, Body).pipe(
+  updateAppNSerio<T>(url: string, Body: T): Observable<T> {
+    return this.http.put<T>(`${this.apiUrl}${url}`, Body).pipe(
       map(res => res),
       catchError(error => {
         console.error('Error PUT AppNSerio:', error);

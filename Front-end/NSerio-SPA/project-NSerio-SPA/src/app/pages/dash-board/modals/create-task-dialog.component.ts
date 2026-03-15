@@ -7,11 +7,12 @@ import { ChangeInformationService } from 'src/app/services/change-information.se
 import { MessageService } from 'src/app/services/message-service';
 import { NserioApiService } from 'src/app/services/nserio-api.service';
 import Swal from 'sweetalert2';
-import { IAllTasks, IAllTasksSpanish } from '../../task/interfaces/IAllTasks';
+import { IAllTasks, IAllTasksSpanish } from '../../../interfaces/IAllTasks';
 import { concat, concatMap, map, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { Developer, PriorityStatus, ProjectStatus, ResponseModelGenericStatus, TaskStatus } from 'src/app/interfaces/ICodeGenericModel';
 import { responseModel } from 'src/app/Shared/responseModel';
 import { LoadInformationInitialService } from 'src/app/services/load-information-initial.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -33,7 +34,9 @@ export class CreateTaskDialogComponent implements OnInit, OnDestroy {
     private readonly formB: FormBuilder,
     private readonly shared: ChangeInformationService<IAllTasksSpanish>,
     private readonly swal: MessageService,
-    private readonly loadInfo:LoadInformationInitialService
+    private readonly loadInfo:LoadInformationInitialService,
+    private readonly router:Router,
+
   ) {
     this.formTask = this.formB.group({
       projectId: [-1],
@@ -57,20 +60,6 @@ export class CreateTaskDialogComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           console.log(res);
-
-          this.formTask.patchValue({
-            projectId: res.Proyecto,
-            title: res.Título,
-            description: res.Descripción,
-            assigneeId: res['Asignado a'],
-            status: res.Estado,
-            priority: res.Prioridad,
-            estimatedComplexity: res['Complejidad estimada'],
-            dueDate: res['Fecha de vencimiento'].split('T')[0],
-          });
-         
-          console.log(res);
-
         },
         error: (err) => {
           this.swal.error(
@@ -79,6 +68,8 @@ export class CreateTaskDialogComponent implements OnInit, OnDestroy {
           );
         },
       });
+
+      this.getTaskId();
   }
 
   ngOnDestroy(): void {
@@ -103,8 +94,17 @@ export class CreateTaskDialogComponent implements OnInit, OnDestroy {
     this.dialogRef.closeAll();
   }
 
+  public handleTaskAction(): void {
+    if(!this.IsBtnClose){
+        this.updateTasks();
+    }else{
+      this.saveTasks();
+    }
+  }
+
   public saveTasks(): void {
     if (this.formTask.valid) {
+
       this.api.createAppNSerio(`Task/tasks`, this.formTask.value).subscribe({
         next: (res) => {
           Swal.fire({
@@ -138,6 +138,61 @@ export class CreateTaskDialogComponent implements OnInit, OnDestroy {
       this.formTask.markAllAsTouched();
     }
   }
+
+  public updateTasks(): void {
+
+    const {status, priority, estimatedComplexity } = this.formTask.value;
+
+    const model = {
+      status: status,
+      priority: priority,
+      estimatedComplexity: estimatedComplexity,
+    }
+
+    this.api.updateAppNSerio(`Task/${this.taskIdUp}/status`, model).subscribe({
+      next: (res) => {
+      this.swal.success('Se actualizo correctamente.');     
+      this.router.url;
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([this.router.url]);
+      });  
+      },
+      error :(err) => {
+           this.swal.error('Error al guardar la tarea'); 
+      },
+    })
+  }
+
+
+
+
+  public IsBtnClose: boolean = true;
+  public taskIdUp!: number;
+
+
+  public getTaskId(): void{
+
+
+     const url = this.router.url;
+
+     if(url.includes("informationTask")){
+      this.IsBtnClose = false;
+      this.taskIdUp = Number(url.split("/")[3]);
+      this.api.getAppNSerio(`Task/GetTasksById?id=${this.taskIdUp}`).subscribe({
+        next: (res) => {
+          this.formTask.patchValue({
+            ...res[0],
+            dueDate:res[0].dueDate?.split('T')[0]
+          });
+        },
+        error: (err) =>  {
+          
+        },
+      })
+     }
+  }
+
+
 
 
 }
